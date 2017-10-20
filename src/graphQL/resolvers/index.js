@@ -8,6 +8,7 @@ export default {
   Query: {
     getTweet: tweet.getTweet,
     getTweets: tweet.getTweets,
+    me: user.me,
   },
   Mutation: {
     createTweet: tweet.createTweet,
