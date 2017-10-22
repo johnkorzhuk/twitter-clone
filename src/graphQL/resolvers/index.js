@@ -1,20 +1,25 @@
 import GraphQLDate from 'graphql-date';
 
-import tweet from './tweet';
-import user from './user';
+import tweetResolvers from './tweet';
+import userResolvers from './user';
+import User from '../../models/User';
 
 export default {
   Date: GraphQLDate,
+  Tweet: {
+    user: ({ user: userID }) => User.findById(userID),
+  },
   Query: {
-    getTweet: tweet.getTweet,
-    getTweets: tweet.getTweets,
-    me: user.me,
+    getTweet: tweetResolvers.getTweet,
+    getTweets: tweetResolvers.getTweets,
+    getOwnTweets: tweetResolvers.getOwnTweets,
+    me: userResolvers.me,
   },
   Mutation: {
-    createTweet: tweet.createTweet,
-    updateTweet: tweet.updateTweet,
-    deleteTweet: tweet.deleteTweet,
-    signup: user.signup,
-    login: user.login,
+    createTweet: tweetResolvers.createTweet,
+    updateTweet: tweetResolvers.updateTweet,
+    deleteTweet: tweetResolvers.deleteTweet,
+    signup: userResolvers.signup,
+    login: userResolvers.login,
   },
 };
